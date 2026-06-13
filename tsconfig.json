@@ -12,7 +12,7 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "noImplicitThis": true,
-    "target": "es2020",
+    "target": "ES2022",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -27,6 +27,7 @@
       "material-dynamic-table/*": [
         "dist/material-dynamic-table/*"
       ]
-    }
+    },
+    "useDefineForClassFields": false
   }
 }
