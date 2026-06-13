@@ -1,6 +1,6 @@
 import { Breakpoints } from '@angular/cdk/layout';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatLegacyPaginatorIntl as MatPaginatorIntl } from '@angular/material/legacy-paginator';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
