@@ -131,19 +131,20 @@ const PRODUCT_DATA: Product[] = [
 ];
 
 @Component({
-  selector: 'ld-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [
-    {
-      provide: MatPaginatorIntl,
-      useClass: GermanDynamicTableControlsIntl
-    },
-    {
-      provide: DynamicTableControlsIntl,
-      useClass: GermanDynamicTableControlsIntl
-    }
-  ]
+    selector: 'ld-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    providers: [
+        {
+            provide: MatPaginatorIntl,
+            useClass: GermanDynamicTableControlsIntl
+        },
+        {
+            provide: DynamicTableControlsIntl,
+            useClass: GermanDynamicTableControlsIntl
+        }
+    ],
+    standalone: false
 })
 export class AppComponent implements AfterViewInit {
 

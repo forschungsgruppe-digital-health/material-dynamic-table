@@ -4,7 +4,8 @@ import { ColumnConfig } from '../../column-config.model';
 
 @Component({
     selector: 'mdt-date-cell',
-    template: '{{ row[column.name] | date:dateFormat }}'
+    template: '{{ row[column.name] | date:dateFormat }}',
+    standalone: false
 })
 export class DateCellComponent implements CellComponent, OnInit {
     @Input() column: ColumnConfig;

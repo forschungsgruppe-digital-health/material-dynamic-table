@@ -6,7 +6,8 @@ import { ColumnConfig } from '../column-config.model';
 
 @Component({
     selector: 'mdt-table-cell',
-    template: '<ng-template mdtCellHost></ng-template>'
+    template: '<ng-template mdtCellHost></ng-template>',
+    standalone: false
 })
 export class TableCellComponent implements OnInit {
     @ViewChild(CellDirective, { static: true }) cellHost: CellDirective;

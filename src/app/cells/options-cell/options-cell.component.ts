@@ -4,7 +4,8 @@ import { Product } from '../../product';
 
 @Component({
     selector: 'ld-options-cell',
-    templateUrl: './options-cell.component.html'
+    templateUrl: './options-cell.component.html',
+    standalone: false
 })
 export class OptionsCellComponent implements CellComponent {
     @Input()

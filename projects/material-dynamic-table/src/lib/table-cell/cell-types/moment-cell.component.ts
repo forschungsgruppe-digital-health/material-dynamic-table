@@ -5,8 +5,9 @@ import {ColumnConfig} from '../../column-config.model';
 import moment from 'moment';
 
 @Component({
-  selector: 'mdt-moment-cell',
-  template: '{{ getLocalizedMoment() }}'
+    selector: 'mdt-moment-cell',
+    template: '{{ getLocalizedMoment() }}',
+    standalone: false
 })
 export class MomentCellComponent implements CellComponent, OnInit {
 
