@@ -1,5 +1,5 @@
 {
-  "name": "@tud-fgdh/material-dynamic-table",
+  "name": "@forschungsgruppe-digital-health/material-dynamic-table",
   "version": "21.0.0",
   "license": "MIT",
   "author": "Marcin Suty",
@@ -20,7 +20,7 @@
     "type": "git"
   },
   "publishConfig": {
-    "@tud-fgdh:registry": "https://gitlab.hrz.tu-chemnitz.de/api/v4/projects/14978/packages/npm/"
+    "registry": "https://npm.pkg.github.com"
   },
   "peerDependencies": {
     "@angular/cdk": "^14.2.5",
