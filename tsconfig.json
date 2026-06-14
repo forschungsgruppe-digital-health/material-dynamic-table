@@ -7,18 +7,14 @@
     "sourceMap": true,
     "declaration": false,
     "module": "es2020",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "noImplicitThis": true,
-    "target": "es2020",
+    "target": "ES2022",
     "typeRoots": [
       "node_modules/@types"
-    ],
-    "lib": [
-      "es2020",
-      "dom"
     ],
     "paths": {
       "material-dynamic-table": [
@@ -27,6 +23,7 @@
       "material-dynamic-table/*": [
         "dist/material-dynamic-table/*"
       ]
-    }
+    },
+    "useDefineForClassFields": false
   }
 }

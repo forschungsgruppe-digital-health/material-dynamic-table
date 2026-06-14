@@ -5,7 +5,8 @@ import { DateFilter } from './date-filter.model';
 
 @Component({
     selector: 'ld-date-filter',
-    templateUrl: './date-filter.component.html'
+    templateUrl: './date-filter.component.html',
+    standalone: false
 })
 export class DateFilterComponent implements OnInit {
 

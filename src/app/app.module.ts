@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,15 +16,12 @@ import { CellService, DynamicTableModule } from 'material-dynamic-table';
 import { AppComponent } from './app.component';
 import { OptionsCellComponent } from './cells/options-cell/options-cell.component';
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
         OptionsCellComponent
     ],
-    imports: [
-        BrowserModule,
+    bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
-        HttpClientModule,
         DynamicTableModule,
         FormsModule,
         MatButtonModule,
@@ -33,10 +30,7 @@ import { OptionsCellComponent } from './cells/options-cell/options-cell.componen
         MatNativeDateModule,
         MatMenuModule,
         MatIconModule,
-        MatPaginatorModule
-    ],
-    bootstrap: [AppComponent]
-})
+        MatPaginatorModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
   constructor(private readonly cellService: CellService) {
     cellService.registerCell('options', OptionsCellComponent);

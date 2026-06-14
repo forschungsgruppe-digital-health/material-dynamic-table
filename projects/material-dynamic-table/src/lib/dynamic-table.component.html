@@ -5,64 +5,69 @@
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </div>
-  <ng-container *ngIf="controlsPosition === controlsPositions.top">
+  @if (controlsPosition === controlsPositions.top) {
     <ng-container *ngTemplateOutlet="mdtControls"></ng-container>
-  </ng-container>
+  }
 </div>
 <table mat-table
-       matSort
-       matSortDirection="{{sortDirection}}"
-       [dataSource]="dataSource">
-  <caption class="mdt-caption" *ngIf="caption">{{caption}}</caption>
-  <ng-container *ngFor="let column of preparedColumns"
-                [matColumnDef]="column.name"
-                [sticky]="column.sticky === 'start'"
-                [stickyEnd]="column.sticky === 'end'">
-    <th mat-header-cell *matHeaderCellDef
+  matSort
+  matSortDirection="{{sortDirection}}"
+  [dataSource]="dataSource">
+  @if (caption) {
+    <caption class="mdt-caption">{{caption}}</caption>
+  }
+  @for (column of preparedColumns; track column) {
+    <ng-container
+      [matColumnDef]="column.name"
+      [sticky]="column.sticky === 'start'"
+      [stickyEnd]="column.sticky === 'end'">
+      <th mat-header-cell *matHeaderCellDef
         mat-sort-header="{{ column.name }}"
         [disabled]="column.sort === false">
-      {{ column.displayName }}
-      <button mat-icon-button
-              *ngIf="showFilters && canFilter(column)"
-              (click)="filter(column); $event.stopPropagation();"
-              matTooltip="{{ getFilterDescription(column) }}"
-              matTooltipDisabled="{{ !getFilterDescription(column) }}">
-        <ng-container [ngTemplateOutlet]="customSetColumnFilterIconTpl ? customSetColumnFilterIconTpl : defaultSetColumnFilterIcon"
-                      [ngTemplateOutletContext]="{ isFilteredColumn: isFiltered(column) }">
-        </ng-container>
-        <ng-content select="ng-template[mdtSetColumnFilterIcon]"></ng-content>
-      </button>
-    </th>
-    <td mat-cell *matCellDef="let row">
-      <mdt-table-cell [row]="row" [column]="column"></mdt-table-cell>
-    </td>
-  </ng-container>
+        {{ column.displayName }}
+        @if (showFilters && canFilter(column)) {
+          <button mat-icon-button
+            (click)="filter(column); $event.stopPropagation();"
+            matTooltip="{{ getFilterDescription(column) }}"
+            matTooltipDisabled="{{ !getFilterDescription(column) }}">
+            <ng-container [ngTemplateOutlet]="customSetColumnFilterIconTpl ? customSetColumnFilterIconTpl : defaultSetColumnFilterIcon"
+              [ngTemplateOutletContext]="{ isFilteredColumn: isFiltered(column) }">
+            </ng-container>
+            <ng-content select="ng-template[mdtSetColumnFilterIcon]"></ng-content>
+          </button>
+        }
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mdt-table-cell [row]="row" [column]="column"></mdt-table-cell>
+      </td>
+    </ng-container>
+  }
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: stickyHeader"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"></tr>
 </table>
-<ng-container *ngIf="controlsPosition === controlsPositions.bottom">
+@if (controlsPosition === controlsPositions.bottom) {
   <ng-container *ngTemplateOutlet="mdtControls"></ng-container>
-</ng-container>
+}
 
 
 <ng-template #mdtControls>
   <div class="mdt-container-after">
     <div class="mdt-actions">
       <button mat-icon-button
-              matTooltip="{{dynamicTableControlsIntl.resetFilterLabel}}"
-              [hidden]="!showFilters"
-              (click)="clearFilters()">
+        matTooltip="{{dynamicTableControlsIntl.resetFilterLabel}}"
+        [hidden]="!showFilters"
+        (click)="clearFilters()">
         <ng-container [ngTemplateOutlet]="customResetFilterIconTpl ? customResetFilterIconTpl : defaultResetFilterIcon"
-                      [ngTemplateOutletContext]="{ hasSetFilter: hasSetFilter() }">
+          [ngTemplateOutletContext]="{ hasSetFilter: hasSetFilter() }">
         </ng-container>
         <ng-content select="ng-template[mdtResetFilterIcon]"></ng-content>
       </button>
     </div>
     <div class="mdt-paginator" [hidden]="!isUsingInternalPaginator()">
       <mat-paginator [pageSize]="pageSize"
-                     [pageSizeOptions]="pageSizeOptions"
-                     [showFirstLastButtons]="showFirstLastButton">
+        [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="showFirstLastButton">
       </mat-paginator>
     </div>
   </div>

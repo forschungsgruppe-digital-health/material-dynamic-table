@@ -5,7 +5,8 @@ import { TextFilter } from './text-filter.model';
 
 @Component({
     selector: 'ld-text-filter',
-    templateUrl: './text-filter.component.html'
+    templateUrl: './text-filter.component.html',
+    standalone: false
 })
 export class TextFilterComponent implements OnInit {
 

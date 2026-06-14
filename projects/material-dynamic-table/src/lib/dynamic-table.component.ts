@@ -24,19 +24,22 @@ import { DynamicTableControlsIntl } from './dynamic-table-controls-intl';
 import { ColumnFilterService } from './table-cell/cell-types/column-filter.service';
 
 @Directive({
-  selector: 'ng-template[mdtSetColumnFilterIcon]'
+    selector: 'ng-template[mdtSetColumnFilterIcon]',
+    standalone: false
 })
 export class DynamicTableSetColumnFilterIconDirective {}
 
 @Directive({
-  selector: 'ng-template[mdtResetFilterIcon]'
+    selector: 'ng-template[mdtResetFilterIcon]',
+    standalone: false
 })
 export class DynamicTableResetFilterIconDirective {}
 
 @Component({
-  selector: 'mdt-dynamic-table',
-  templateUrl: './dynamic-table.component.html',
-  styleUrls: ['./dynamic-table.component.css']
+    selector: 'mdt-dynamic-table',
+    templateUrl: './dynamic-table.component.html',
+    styleUrls: ['./dynamic-table.component.css'],
+    standalone: false
 })
 export class DynamicTableComponent implements OnInit, AfterViewInit {
 
