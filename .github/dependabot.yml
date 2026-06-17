@@ -1,0 +1,30 @@
+# Automated dependency-update PRs.
+# Commit-message prefixes are Conventional-Commit types so PRs pass `pr-lint`
+# and feed the changelog/version automation (see VERSIONING.md).
+version: 2
+updates:
+  # Library workspace (Angular) — group Angular + the routine minor/patch bumps to cut noise.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: build
+      include: scope
+    groups:
+      angular:
+        patterns: ["@angular*", "@angular-*", "ng-*"]
+      minor-and-patch:
+        update-types: ["minor", "patch"]
+
+  # GitHub Actions used by the workflows.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci
+    groups:
+      actions:
+        update-types: ["minor", "patch"]
