@@ -1,0 +1,25 @@
+name: ci
+# Lint + build + test gate for the Angular library workspace.
+# A change is not done until lint, tests, and build are green (see CONTRIBUTING.md).
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --legacy-peer-deps
+      - run: npm run lint
+      - run: npx ng build material-dynamic-table --configuration production
+      - run: npx ng test material-dynamic-table --watch=false --browsers=ChromeHeadless

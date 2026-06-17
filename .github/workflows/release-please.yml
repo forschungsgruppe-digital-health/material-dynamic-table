@@ -1,0 +1,47 @@
+name: release-please
+# Automated release path (engine chosen 2026-06; see VERSIONING.md / RELEASE.md).
+# On push to master, release-please maintains a "release PR" (version bump + CHANGELOG from
+# Conventional Commits). Merging that PR creates the vX.Y.Z tag + GitHub Release, and — in the
+# SAME run — the publish job builds the library and publishes it to GitHub Packages.
+# (A token-created tag does not trigger publish.yml's `release` event, so publishing is wired
+# here rather than relying on the tag/release event. publish.yml stays as the manual path.)
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.rp.outputs.release_created }}
+      tag_name: ${{ steps.rp.outputs.tag_name }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: rp
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  publish:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://npm.pkg.github.com"
+      - run: npm ci --legacy-peer-deps
+      - run: npx ng build material-dynamic-table --configuration production
+      - run: npm publish
+        working-directory: dist/material-dynamic-table
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

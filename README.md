@@ -2,16 +2,93 @@
 
 # material-dynamic-table
 
+A dynamic Angular table component built on top of the Angular Material table — sorting, pagination, per-column filtering, and pluggable cell/filter components. Maintained by **TU Dresden / Forschungsgruppe Digital Health (FGDH)** and published to GitHub Packages as **`@forschungsgruppe-digital-health/material-dynamic-table`**.
+
+## Installation / Usage
+
+The package is published to **GitHub Packages** (private), so npm needs to resolve the
+`@forschungsgruppe-digital-health` scope against that registry and authenticate with a token that
+has `read:packages`. Add an `.npmrc` (project- or user-level) with:
+
+```ini
+@forschungsgruppe-digital-health:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+Then install:
+
+```bash
+npm install @forschungsgruppe-digital-health/material-dynamic-table
+```
+
+Import the module and use the component (full API and examples under [Reference](#reference)):
+
+```ts
+import { NgModule } from '@angular/core';
+import { DynamicTableModule } from '@forschungsgruppe-digital-health/material-dynamic-table';
+
+@NgModule({
+  imports: [DynamicTableModule],
+})
+export class AppModule {}
+```
+
+```html
+<mdt-dynamic-table [columns]="columns" [dataSource]="dataSource"></mdt-dynamic-table>
+```
+
+## Development
+
+```bash
+git clone https://github.com/forschungsgruppe-digital-health/material-dynamic-table.git
+cd material-dynamic-table
+npm ci --legacy-peer-deps          # install dependencies
+npm run lint                       # ng lint
+npx ng build material-dynamic-table --configuration production   # build the library
+npx ng test material-dynamic-table --watch=false --browsers=ChromeHeadless   # run tests
+```
+
+**Hot-reload loop** (library + demo app side by side):
+
+```bash
+npx ng build material-dynamic-table --watch   # rebuild the lib on change
+npm start                                      # ng serve — demo app on http://localhost:4200
+```
+
+The demo app (`lib-demo`) consumes the freshly built library output, so editing the library and
+refreshing the browser shows your changes live.
+
+## Setup
+
+- **Node 22** (the toolchain and CI target Node 22).
+- Angular Material must be set up in the consuming app — see
+  <https://material.angular.io/guide/getting-started>. Material icons are needed for the filter
+  affordance.
+
+## Contributing / Versioning / Release / License
+
+- [CONTRIBUTING.md](CONTRIBUTING.md) — branch model (`master` is the releasable branch),
+  Conventional Commits, PR rules.
+- [VERSIONING.md](VERSIONING.md) — SemVer; the published version lives in
+  `projects/material-dynamic-table/package.json`; release-please-driven.
+- [RELEASE.md](RELEASE.md) — release-please on `master` → tag + GitHub Release → publish to GitHub
+  Packages; the manual `publish.yml` path.
+- License: **MIT** (see [LICENSE](LICENSE)).
+
+---
+
+## Reference
+
 Dynamic table component for angular built on top of angular material table. It offers sorting, pagination, filtering per column and the ability to specify content types and components used for displaying them.
 The initial purpose of this library was to display data coming from OData API, although it can work with MatTableDataSource (however it needs to be extended to enable filtering - see example).
 
-## Demo
+### Demo
 
 Online demo: https://stackblitz.com/edit/dynamic-table
 
 Run `ng serve` for the main project to launch demo for this library.
 
-## Getting started
+### Getting started
 
 #### 1. Prerequisites:
 
@@ -137,7 +214,7 @@ export class AppComponent {
 }
 ```
 
-## Further info
+### Further info
 
 #### API reference for material-dynamic-table
 
